@@ -1,0 +1,66 @@
+<canvas id="myCanvas" width="600" height="600"></canvas>
+
+<script>
+  var canvas = document.getElementById("myCanvas");
+  var ctx = canvas.getContext("2d");
+
+  // Función para dibujar un pétalo con gradiente
+  function drawPetal(x, y, angle) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(angle);
+
+    var petalGradient = ctx.createLinearGradient(-30, -60, 30, 0);
+    petalGradient.addColorStop(0, "#ffeb3b"); // Amarillo claro
+    petalGradient.addColorStop(1, "#fbc02d"); // Amarillo oscuro
+
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 30, 60, 0, 0, Math.PI * 2);
+    ctx.fillStyle = petalGradient;
+    ctx.fill();
+    ctx.restore();
+  }
+
+  // Función para dibujar una flor
+  function drawFlower(x, y) {
+    for (var i = 0; i < 6; i++) {
+      drawPetal(x, y, (Math.PI / 3) * i);
+    }
+    // Centro de la flor
+    var centerGradient = ctx.createRadialGradient(x, y, 10, x, y, 30);
+    centerGradient.addColorStop(0, "#ff9800"); // Naranja claro
+    centerGradient.addColorStop(1, "#e65100"); // Naranja oscuro
+
+    ctx.beginPath();
+    ctx.arc(x, y, 30, 0, Math.PI * 2);
+    ctx.fillStyle = centerGradient;
+    ctx.fill();
+
+    // Tallo
+    ctx.fillStyle = "green";
+    ctx.fillRect(x - 5, y + 30, 10, 100); // Tallos
+
+    // Hojas
+    drawLeaf(x - 20, y + 50);
+    drawLeaf(x + 10, y + 50);
+  }
+
+  // Función para dibujar una hoja
+  function drawLeaf(x, y) {
+    ctx.fillStyle = "green";
+    ctx.beginPath();
+    ctx.ellipse(x, y, 20, 10, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // Dibujar varias flores separadas
+  function drawBouquet() {
+    drawFlower(150, 150);
+    drawFlower(300, 100);
+    drawFlower(450, 150);
+    drawFlower(200, 300);
+    drawFlower(350, 250);
+  }
+
+  drawBouquet();
+</script>
