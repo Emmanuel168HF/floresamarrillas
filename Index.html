@@ -62,5 +62,14 @@
     drawFlower(350, 250);
   }
 
+  // Función para dibujar el mensaje
+  function drawMessage() {
+    ctx.fillStyle = "black";
+    ctx.font = "24px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("para ti Mari uwu", canvas.width / 2, canvas.height - 30);
+  }
+
   drawBouquet();
+  drawMessage();
 </script>
